@@ -9,7 +9,7 @@ phonebook = {
 # code here
 
 phonebook['Jake']=938273443
-phonebook.pop('Jill')
+phonebook.pop('Jill') # Apparently doing "del phonebook['Jill']" does not work
 
 # code test
 

@@ -1,0 +1,108 @@
+Modules are pieces of software that has a specific function. Like if you were to build a snake game, you'd want to have a module that works with game logic.
+Modules in Python are written in, well, Python. And as such have the .py extension. The name of the file can be aligned with its function as a module "game.py", "draw.py", etc
+
+ ____________________________________________________________________
+|_Importing_the_"draw"_module_to_use_its_functions___________|-|[]|X|
+| import draw                                                       |
+|                                                                   |
+| def play_game():                                                  |
+|     ...                                                           |
+|                                                                   |
+| def main():                                                       |
+|     result = play_game()                                          |
+|     draw.draw_game(result)                                        |
+|                                                                   |
+| #this means that if this is executed, then main() will be executed|
+| if __name__ == '__main__':                                        |
+|     main()                                                        |
+|___________________________________________________________________|
+
+The draw module can look like this
+ ______________________________________
+|_draw.py______________________|_|[]|X|
+|                                     |
+| def draw_game():                    |
+|     code...                         |
+| def clear_screen(screen):           |
+|_____...code_________________________|
+
+You can import specific functions from modules with "from [Module] import [Function]"
+from draw import draw_game
+Similarly you can import all objects from a module
+from draw import *
+
+Custom Import Names
+Modues can be loaded under anyname with "as"
+
+ __________________________________________
+|_stuff____________________________|_|[]|X|
+|                                         |
+| if visualMode:                          |
+|     in visual mode we draw w/graphics   |
+|     import draw_visual as draw          |
+| else:                                   |
+|     #in text mode we print text         |
+|     import draw_textual as draw         |
+|                                         |
+| def main():                             |
+|     result = play_game()                |
+|     #this can either be visual or text  |
+| depending on visualMode                 |
+|_____draw.draw_game(result)______________|
+
+Module Initalization
+Once a script starts and a module is loaded, it loads it just once. If another module in the code imports the same module again, it won't load again. so local variables inside the module act as a "singleton", meaning they get initalized once. The you can initalize he objects again like this:
+
+ _____________________________________________________________
+|_draw.py_____________________________________________|_|[]|X|
+|                                                            |
+| def draw_game():                                           |
+|     # when clearing the screen, we can use the main screen |
+| object initalized in this module                           |
+|     clear_screen(main_screen):                             |
+|     ...                                                    |
+| def clear_screen(screen):                                  |
+|     ...                                                    |
+| def Screen():                                              |
+|     ...                                                    |
+| # initalize main_screen as a singleton                     |
+|_main_screen = Screen()_____________________________________|
+
+Extending Modue Load Path
+Python has a couple of ways to tell it to look for modules, aside from local directories and built-in modules. PYTHONPATH is an enviroment variable that can specify additional directories
+
+"PYTHONPATH=/foo python game.py"
+
+This executes 'game.py', and enables the script to load modues from directory '/foo', as well as the local directory
+
+Another way to do it is 'sys.path.append'. A function that should be ran before the import command
+
+'sys.append.path("/foo")'
+
+Built-in Modules
+Python has built in modules (a list of which can be found here: https://www.docs.python.org/3/library) \
+Some helpful and important functions come in handy when exloring modules are 'dir' & 'help'
+
+URLLib is a module/library that allows the creation of read data from URLs
+
+ __________________________
+|_url_reader.py____|_|[]|X|
+|                         |
+| import urllib           |
+|                         |
+| urllib.open(...)        |
+|_________________________|
+
+To see built-in functions in a module, you can use python in a terminal and:
+
+ ___________________________________________
+|_terminal__________________________|_|[]|X|
+|                                          |
+| >>> import urllib                        |
+| >>> dir(urllib)                          |
+| [And then here a WHOLE buncha stuff here]|
+|__________________________________________|
+
+And then once we find the function we need, we can 'help(urllib.<function>)'
+
+(ok I'll update this later holy shit bro this is a LOT for my smol brain)
